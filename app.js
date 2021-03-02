@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const port = process.env.PORT || 8080;
 const validUrl = require('valid-url');
 
@@ -20,6 +20,7 @@ app.get('/', function(req, res) {
         console.log('Screenshotting: ' + urlToScreenshot);
         (async() => {
             const browser = await puppeteer.launch({
+                executablePath: process.env.GOOGLE_CHROME_BIN,
                 args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
 
